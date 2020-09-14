@@ -1,7 +1,21 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const [count, setCount] = useState({});
+
+  useEffect(() => {
+    fetch("/api/hello")
+      .then((resp) => resp.json())
+      .then((a) => {
+        setCount(a);
+      })
+      .catch((a) => {
+        console.log("error", a);
+      });
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,9 +27,10 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        <pre>{JSON.stringify(count)}</pre>
 
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{" "}
           <code className={styles.code}>pages/index.js</code>
         </p>
 
@@ -56,10 +71,10 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
     </div>
-  )
+  );
 }
