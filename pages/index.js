@@ -6,14 +6,7 @@ export default function Home() {
   const [count, setCount] = useState({});
 
   useEffect(() => {
-    fetch("/api/hello")
-      .then((resp) => resp.json())
-      .then((a) => {
-        setCount(a);
-      })
-      .catch((a) => {
-        console.log("error", a);
-      });
+    console.log("REACT Mounted");
   }, []);
 
   return (
